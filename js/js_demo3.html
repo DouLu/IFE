@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table来实现一个九九乘法表</title>
+    <style>
+        table td{
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<p>九九乘法表</p>
+<table border="1px">
+    <tbody id="tb">
+
+    </tbody>
+</table>
+<script type="text/javascript" rel="script">
+    (function () {
+        let html = '';
+        for(let i=1;i<10;i++){
+            let tr = '<tr>';
+            for(let j=1;j<10;j++){
+                if(j<=i){
+                    tr += '<td>'+i*j+'</td>';
+                }else {
+                    tr += '<td></td>';
+                }
+            }
+            html += tr + '</tr>';
+        }
+        document.getElementById('tb').innerHTML = html;
+    }());
+</script>
+</body>
+</html>

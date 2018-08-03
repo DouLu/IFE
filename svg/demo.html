@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG练习demo</title>
+</head>
+<body>
+<h4>线</h4>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2"></line>
+    <polyline points="20,20 40,25 60,40 80,120 120,140 200,180" style="fill:none;stroke:black;stroke-width:3"></polyline>
+</svg>
+<h4>矩形</h4>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <rect width="300" height="100" style="fill:rgb(0,0,112);stroke-width:2;stroke:rgb(0,0,0)"></rect>
+</svg>
+<h4>圆形+文字</h4>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <text x="0" y="15" fill="red" transform="rotate(30 20,40)">I love SVG</text>
+    <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red"></circle>
+</svg>
+<h4>路径文字</h4>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path id="path1" d="M75,20 a1,1 0 0,0 100,0"></path>
+    </defs>
+    <text x="10" y="100" style="fill:red;">
+        <textPath xlink:href="#path1">I love SVG I love SVG</textPath>
+    </text>
+</svg>
+<h4>SVG路径</h4>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <!--开始于位置150 0，到达位置75 200，然后从那里开始到225 200，最后在150 0关闭路径-->
+    <path d="M150 0 L75 200 L225 200 Z"></path>
+</svg>
+<h4>SVG路径——二次方贝塞尔曲线</h4>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="400" width="650">
+    <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="3" fill="none"></path>
+    <path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="3" fill="none"></path>
+    <path d="M 175 200 l 150 0" stroke="green" stroke-width="3" fill="none"></path>
+    <path d="M 100 350 q 150 -300 300 0 q 100 -150 200 0" stroke="blue" stroke-width="5" fill="none"></path>
+    <!-- Mark relevant points -->
+    <g stroke="black" stroke-width="3" fill="black">
+        <circle id="pointA" cx="100" cy="350" r="3"></circle>
+        <circle id="pointB" cx="250" cy="50" r="3"></circle>
+        <circle id="pointC" cx="400" cy="350" r="3"></circle>
+    </g>
+    <!-- Label the points -->
+    <g font-size="30" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+        <text x="100" y="350" dx="-30">A</text>
+        <text x="250" y="50" dy="-10">B</text>
+        <text x="400" y="350" dx="30">C</text>
+    </g>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400">
+    <!--花心-->
+    <circle id="" cx="200" cy="200" r="16" stroke="#e152b7" stroke-width="2" fill="#e8ee4a"></circle>
+    <!--花瓣的落脚点-->
+    <g stroke="black" stroke-width="2" fill="black">
+        <circle id="point1" cx="184" cy="200" r="2"></circle>
+        <circle id="point2" cx="216" cy="200" r="2"></circle>
+        <circle id="point3" cx="200" cy="168" r="2"></circle>
+    </g>
+    <!--花瓣-->
+    <path id="b1" d="M 184 200 q 16 -80 32 0" stroke="#4aeecd" stroke-width="2" fill="none"></path>
+</svg>
+</body>
+</html>

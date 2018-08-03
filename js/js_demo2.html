@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IFE ECMAScript</title>
+</head>
+<body>
+<input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+<input id="bin-bit" type="number" placeholder="输入的数字宽度">
+<button id="trans-btn">转化为二进制</button>
+<p id="result">运算结果</p>
+<script>
+    //二进制转十进制
+    //要从右到左用二进制的每个数去乘以2的相应次方,小数点后则是从左往右
+    //用2整除十进制整数，可以得到一个商和余数；再用2去除商，又会得到一个商和余数，如此进行，直到商为0时为止，
+    // 然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。
+    function dec2bin(decNumber) {
+        // 在这里实现你的转化方法，注意需要判断输入必须为一个非负整数
+        if (decNumber < 0) {
+            alert('输入一个十进制非负整数！');
+            return 0;
+        }
+        let binArr = [];
+        let bin = (d) =>{
+            if( d===0){
+                return binArr;
+            }else {
+                if(d%2===0){
+                    binArr.push(0);
+                }else {
+                    binArr.push(1);
+                }
+            }
+            return bin(Math.floor(d/2));
+        };
+        return bin(decNumber).join('');
+    }
+    //转化显示后的二进制数为bin-bit中输入的数字宽度
+    function dec2bin1(decNumber,binBit) {
+        // 在这里实现你的转化方法，注意需要判断输入必须为一个非负整数
+        if (decNumber < 0) {
+            alert('输入一个十进制非负整数！');
+            return 0;
+        }
+        let binArr = [];
+        let bin = (d) =>{
+            if( d===0){
+                return binArr;
+            }else {
+                if(d%2===0){
+                    binArr.push(0);
+                }else {
+                    binArr.push(1);
+                }
+            }
+            return bin(Math.floor(d/2));
+        };
+        let resArr = bin(decNumber);
+        if(binBit<resArr.length){
+            console.log('error:'+'bin-bit小于转化后的二进制本身位数！');
+        }else {
+            let arr = new Array(binBit-resArr.length+1);
+            arr = arr.join('0,').split(',');
+            arr.lenth = arr.lenth -1;
+            resArr = arr.concat(resArr);
+        }
+        return resArr.join('');
+    }
+    // 实现党点击转化按钮时，将输入的十进制数字转化为二进制，并显示在result的p标签内
+    // Some coding
+    document.getElementById('trans-btn').onclick = function () {
+        let decNum = document.getElementById('dec-number').value;
+        let binBit = document.getElementById('bin-bit').value;
+        document.getElementById('result').innerHTML = '<p>运算结果：'+dec2bin(decNum)+'</p>'+'<p>加数字宽度结果：'+ dec2bin1(decNum,binBit)+'</p>';
+    };
+
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--http://ife.baidu.com/course/detail/id/50-->
+    <meta charset="UTF-8">
+    <title>中序遍历、后序遍历有问题</title>
+</head>
+<body>
+<script type="text/javascript" rel="script">
+    let tree = {
+        "id": 0,
+        "name": "root",
+        "left": {
+            "id": 1,
+            "name": "Simon",
+            "left": {
+                "id": 3,
+                "name": "Carl",
+                "left": {
+                    "id": 7,
+                    "name": "Lee",
+                    "left": {
+                        "id": 11,
+                        "name": "Fate"
+                    }
+                },
+                "right": {
+                    "id": 8,
+                    "name": "Annie",
+                    "left": {
+                        "id": 12,
+                        "name": "Saber"
+                    }
+                }
+            },
+            "right": {
+                "id": 4,
+                "name": "Tony",
+                "left": {
+                    "id": 9,
+                    "name": "Candy"
+                }
+            }
+        },
+        "right": {
+            "id": 2,
+            "name": "right",
+            "left": {
+                "id": 5,
+                "name": "Carl",
+            },
+            "right": {
+                "id": 6,
+                "name": "Carl",
+                "right": {
+                    "id": 10,
+                    "name": "Kai"
+                }
+            }
+        }
+    };
+    // 假设id和name均不会重复，根据输入name找到对应的id
+    function findIdByName(name) {
+        let id = '';
+        let findID = (tree,n) =>{
+            //根元素找
+            if(tree.name == n){
+                return id = tree.id;
+            }
+            //左子树找
+            if(tree.left){
+                findID(tree.left,n);
+            }
+            //右子树找
+            if(tree.right){
+                findID(tree.right,n);
+            }
+        };
+        findID(tree,name);
+        return id;
+    }
+    console.log("结果:"+findIdByName("Candy"));
+
+    // 假设id和name均不会重复，根据输入id找到对应的name
+    function findNameById(id) {
+        let name = '';
+        let findName = (tree,id) =>{
+            //根元素找
+            if(tree.id == id){
+                return name = tree.name;
+            }
+            //左子树找
+            if(tree.left){
+                findName(tree.left,id);
+            }
+            //右子树找
+            if(tree.right){
+                findName(tree.right,id);
+            }
+        };
+        findName(tree,id);
+        return name;
+    }
+    console.log("结果:"+findNameById("9"));
+
+    // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+    //前序遍历：根节点->左子树->右子树
+    /*let tr = {
+        "name":'a',
+        "left":{
+            "name":'b',
+            "left":{
+                "name":'d',
+                "right":{
+                    "name":'e'
+                }
+            },
+            "right":{
+                "name":'f',
+                "left":{
+                    "name":'g'
+                }
+            }
+        },
+        "right":{
+            "name":'c'
+        }
+    };*/
+    let tr = {
+        "name":'A',
+        "left":{
+            "name":'B',
+            "left":{
+                "name":'C'
+            },
+            "right":{
+                "name":'D',
+                "left":{
+                    "name":'E',
+                    "right":{
+                        "name":'G'
+                    }
+                },
+                "right":{
+                    "name":'F'
+                }
+            }
+        },
+        "right":{
+            "name":'H'
+        }
+    };
+    function getListWithDLR() {
+        let treeArr = [];
+        let dlr = (tree) =>{
+            treeArr.push(tree.name);
+            if(tree.left){
+                dlr(tree.left);
+            }
+            if(tree.right){
+                dlr(tree.right);
+            }
+        };
+        dlr(tr);
+        return treeArr;
+    }
+    console.log("前序遍历："+getListWithDLR().join(','));
+
+    // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+    //中序遍历：左子树->根节点->右子树
+    function getListWithLDR() {
+        let treeArr = [];
+        let ldr = (tree) =>{
+            if(tree.left && !tree.left.left){
+                //左
+                treeArr.push('左'+tree.left.name);
+            }
+            if(tree.left){
+                ldr(tree.left);
+            }
+            if(tree.right){
+                //根
+                if(tree.left){
+                    treeArr.push('根'+tree.name);
+                }
+                ldr(tree.right);
+                //右
+                treeArr.push('右'+tree.right.name);
+            }
+        };
+        ldr(tr);
+        return treeArr;
+    }
+    console.log("中序遍历："+getListWithLDR().join(','));
+
+    // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+    //后序遍历：左子树->右子树->根节点
+    function getListWithLRD() {
+        let treeArr = [];
+        let lrd = (tree) =>{
+            if(tree.left && !tree.left.left && !tree.left.right){
+                //左
+                treeArr.push('左'+tree.left.name);
+            }
+            if(tree.left){
+                lrd(tree.left);
+            }
+            if(tree.right){
+                lrd(tree.right);
+                //右
+                treeArr.push('右'+tree.right.name);
+                //根
+                treeArr.push('根'+tree.name);
+            }
+        };
+        lrd(tr);
+        return treeArr;
+    }
+    console.log("后序遍历："+getListWithLRD().join(','));
+</script>
+</body>
+</html>
